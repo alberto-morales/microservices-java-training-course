@@ -305,7 +305,7 @@ Once the server starts successfully, open your browser and put the below URL in 
 	
 ## Bibliography
 
-!RESTful Web Services](./images/Bibliography-1.png)
-!RESTful Web APIs](./images/Bibliography-2.png)
+![RESTful Web Services](./images/Bibliography-1.png)
+![RESTful Web APIs](./images/Bibliography-2.png)
 
 RESTful Web Services is a 2007 book by Leonard Richardson and Sam Ruby. It was the first book-length treatment of RESTful design, and the predecessor to RESTful Web APIs. RESTful Web APIs (2013) was designed as a complete replacement for RESTful Web Services.
