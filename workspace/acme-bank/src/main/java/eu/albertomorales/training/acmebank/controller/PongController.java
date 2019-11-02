@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-
 public class PongController {
 	
 private static final String pongMsg = "Pong Mr./Ms. %s!";
