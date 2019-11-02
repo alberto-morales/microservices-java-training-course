@@ -150,7 +150,7 @@ We recommend to follow this [guide](https://www.eclipse.org/downloads/packages/i
 that illustrates the use of Eclipse Installer (at the current time we use Eclipse Installer 2019-09 R)
 !RESTful Web Services](./images/Eclipse-install-1.png)
 
-### Step 1: Spring Tools for Eclipse IDE instalation
+### Step 1: Spring Tools for Eclipse IDE installation
 
 You can install the Spring Tools for Eclipse IDE into an existing Eclipse installation using the Eclipse Marketplace. Just open the marketplace client in Eclipse, search for Spring Tools and install the “Spring Tools (aka Spring IDE and Spring Tool Suite)” entry.
 
