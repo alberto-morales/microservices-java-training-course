@@ -144,7 +144,7 @@ distributing tasks and distributed tasks.
 
 ### Pre-requisites: 
 
-- RESTful  Web Services with Spring Boot [session](./../RESTFul-Web-Service-Spring-Boot.md) finished.
+- RESTful  Web Services with Spring Boot [session](../RESTFul-Web-Service-Spring-Boot.md) finished.
 
 - SGBD (PostgreSQL	) installed.
 We recommend to follow this [guide](http://www.postgresqltutorial.com/install-postgresql/) that illustrates the PostgreSQL installation proccess (at the current time we use PostgreSQL 12)
