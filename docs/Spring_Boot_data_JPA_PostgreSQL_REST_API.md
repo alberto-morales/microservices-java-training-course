@@ -484,4 +484,4 @@ If you have followed all steps, the RESTful Service is ready to run. Start the a
 ## Summary
 
 Congratulations! You have developed a Spring Boot application with a RESTful front end and a JPA-based back end.
-If you want to improve your REST APIs design skills, you can check [this](https://restfulapi.net/) out
+If you want to improve your REST APIs design skills, you can check [this](https://restfulapi.net/) out ( or [this](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api) )
