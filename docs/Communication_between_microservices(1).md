@@ -1,10 +1,16 @@
-
 # RESTful  Web Services, persistence and entity classes
 
 ## Introduction
 
 The goal of this session is to provide you full autonomy exposing RESTful services with Spring Boot, Spring data and JPA access data stored in a relational database.
  
+The goal of this session is to have every attendee create a small project, to build with and understand the technology and how 
+developers can take advantage of it in their daily workflow.
+
+The goal of the session was to take a WebClient and update it to work asynchronously with live code.
+
+https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-16-04-es
+
 The goal of this session is to achieve full autonomy by installing and configuring Airflow with a standard and easy configuration 
 (but effective for most projects), as well as learn the basic functionalities about workflows creation and getting familiar with 
 Airflow web interface.
@@ -379,110 +385,7 @@ Now, the RESTful Service is ready to run. Start the application and execute the 
 ![Service invocation - 4](./images/data-invokation-4.png)
 ![Service invocation - 5](./images/data-invokation-5.png)
 
-## Handling POST Requests
-
-In the last unit, you added logic to the API for `GET` requests, which retrieved data from the database. In this one, you will add logic to handle `POST` requests on the `LockedCards` endpoint.
-
-### Step 1: New ACME Net application setup
-New features belong to a new Spring Boot application, so the first step is to set up a new database and a new Java Project.
-
-### Step 2: Adding the routing logic
-HTTP `POST` requests are used to create new resources (locked cards, in this case). The basic idea is to pull data out of the HTTP request body and use it to create a new row in the database. Let's create a new LockedCardController.java file and append the code that follows:
-```java
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.ArrayList;
-
-import eu.albertomorales.training.acmenet.persistence.impl.LockedCardImpl;
-import eu.albertomorales.training.acmenet.dto.LockedCardDTO;
-import eu.albertomorales.training.acmenet.persistence.LockedCard;
-import eu.albertomorales.training.acmenet.persistence.LockedCardRepository;
-
-@Controller
-public class LockedCardController {
 	
-...
-	
-	@RequestMapping(value="/locked_cards", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Object> save(@RequestBody LockedCardDTO dto) {
-    	LockedCardImpl entity = new LockedCardImpl(null, 
-    			                                   dto.getPan(),
-    			                                   dto.getReason(),
-    			                                   dto.getComment());
-		entity = repository.save(entity);
-        //Create resource location
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                                    .path("/{id}")
-                                    .buildAndExpand(entity.getId())
-                                    .toUri();
-         
-        
-        //Send location in response
-        return ResponseEntity.created(location).build();
-    }	
-	
-...
-    
-	@Autowired
-	private LockedCardRepository repository;	
-
-}
-```
-The LockedCardController save method function is to save "locked cards" items. Therefore, we need to have a locked card class, containing the entity properties. These properties should correspond to the columns in the “locked_cards table”.
-
-![entity-table-POST](./images/ilustracion-POST.png)
-
-You must create the database table and the entity + repository Java classes,  as described in the last unit.
-
-The POST requests can contain a payload known as "request body”. The payload contains the data that could be stored or updated. The payload is usually in JSON format.
-
-Notice that the method responsible for handling HTTP POST requests needs to be annotated with @PostMapping (or RequestMapping + method = POST) annotation.
-
-To be able to convert the JSON sent as HTTP Body content into a Java object which we can use in our application we need to use the @RequestBody annotation for the method argument. Notice how the @RequestBody annotation is used to mark the method argument object into which the JSON document will be converted by Spring Framework.
-
-To make your method annotated with @PostMapping be able to accept @RequestBody in JSON and XML using the following annotation:
-
-```java
-@PostMapping(
-        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-)
-```
-If you want your Web Service Endpoint to be able to respond with JSON or XML, then update your @PostMapping annotation to this one:
-
-```java
-@PostMapping(
-        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-)
-```
-and to make your Web Service Endpoint respond with XML, provide the below Accept HTTP Header in the Request:
-
-```postman
-accept: application/xml
-```
-If you have followed all steps, the RESTful Service is ready to run. Start the application and execute the new HTTP endpoints — that's it.
-
-![Service invocation - 1](./images/data-invokation-6.png)
-
-
 ## Summary
 
 Congratulations! You have developed a Spring Boot application with a RESTful front end and a JPA-based back end.
-
-If you want to improve your REST APIs design skills, you can check [this](https://restfulapi.net/) out

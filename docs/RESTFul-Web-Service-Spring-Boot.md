@@ -1,3 +1,4 @@
+
 # RESTful  Web Services with Spring Boot
 
 ## Introduction
@@ -5,6 +6,8 @@
 The goal of this session is to achieve full autonomy by installing and configuring Airflow with a standard and easy configuration 
 (but effective for most projects), as well as learn the basic functionalities about workflows creation and getting familiar with 
 Airflow web interface.
+
+It is expected that upon completion of the training session, participants will be able to:
 
 This introduction will explain the basics concepts of Airflow using a business case that will be developed during this session.
 
@@ -16,7 +19,9 @@ different endpoints).
 2. Predicts future (next week price), and compare to original price.
 3. Perform a clustering of ticket (just for learning purposes).
 
-## Spring Boot: motivation, advantages and disadvantages
+## Spring Boot Applications
+
+Spring Boot is a framework that eases the development of web applications. It has a lot of pre-configured modules that eliminate the manual addition of dependencies for developing an application with Spring. This is the sole reason for this being one of the favorites for creating microservices. Let's see how to create a Spring Boot Application in a few minutes.
 
 ### Current situation and motivation for Spring Boot existance
 
@@ -272,7 +277,7 @@ And we'll also add the below information for the property (initially to change t
 So search for `\src\main\resources\application.properties` file and add the below lines to it.
 
 ```properties
-server.port=8083 
+server.port=8081 
 spring.profiles.active=@spring.profiles.active@ 
 ```
 
@@ -301,6 +306,30 @@ Once the server starts successfully, open your browser and put the below URL in 
 
 ![ACME Bank application - 5](./images/acme-bank-application-5.png)
 
+If you would like to receive name as "path param" (instead of "query param") your code must change slightly:
+```java
+@Controller
+public class PongController {
+	
+private static final String pongMsg = "Pong Mr./Ms. %s!";
+
+    @GetMapping("/pong/{name}")
+    @RequestMapping(value={"/pong/{name}","/pong"}, method=RequestMethod.GET)    
+    @ResponseBody
+    public ResponseEntity<Pong> pongUser(@PathVariable(name = "name", required = false) String name) {
+        String username = StringUtils.isEmpty(name) ? "Trainee" : name;
+        return ResponseEntity.ok().body(new Pong(String.format(pongMsg, username)));    	
+    }
+}
+```
+When would you use `@PathVariable` vs `@QueryParam`? This is a "best practices" or convention question.
+REST may not be a standard as such, but reading up on general REST documentation and blog posts should give you some guidelines for a good way to structure API URLs. Most rest APIs tend to only have resource names and resource IDs in the path. Such as:
+```
+/departments/{dept}/employees/{id}
+```
+Some REST APIs use query strings for filtering, pagination and sorting, but Since REST isn't a strict standard I'd recommend checking some REST APIs out there such as github and stackoverflow and see what could work well for your use case.
+
+I'd recommend putting any required parameters in the path, and any optional parameters should certainly be query string parameters. Putting optional parameters in the path will end up getting really messy when trying to write URL handlers that match different combinations.
 
 	
 ## Bibliography
