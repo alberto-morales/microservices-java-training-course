@@ -145,7 +145,7 @@ distributing tasks and distributed tasks.
 
 ### Pre-requisites: 
 
-- RESTful  Web Services with Spring Boot [session](./../RESTFul-Web-Service-Spring-Boot.md) finished.
+- RESTful  Web Services with Spring Boot [session](https://github.com/alberto-morales/microservices-java-training-course/blob/20191101-AcmeBankApplication/docs/RESTFul-Web-Service-Spring-Boot.md) finished.
 
 - SGBD (PostgreSQL	) installed.
 We recommend to follow this [guide](http://www.postgresqltutorial.com/install-postgresql/) that illustrates the PostgreSQL installation proccess (at the current time we use PostgreSQL 12)
@@ -484,5 +484,4 @@ If you have followed all steps, the RESTful Service is ready to run. Start the a
 ## Summary
 
 Congratulations! You have developed a Spring Boot application with a RESTful front end and a JPA-based back end.
-
 If you want to improve your REST APIs design skills, you can check [this](https://restfulapi.net/) out
