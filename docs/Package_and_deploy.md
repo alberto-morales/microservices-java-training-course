@@ -101,7 +101,6 @@ To run the jar file, use the following standard JVM command `java -jar <jar-file
 
 
 ### Step 2. Deploying in Docker Container
-Once the setup of all requirements has been satisfied, a database that supports features for the ACME Bank application must be setup.
 
 Before deploying the application into a Docker container, we will first package the application in a (fat) JAR file. This process is previously explained, therefore we will assume you have a jar file.
 
