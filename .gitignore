@@ -27,3 +27,5 @@ hs_err_pid*
 /workspace/acme-net/.mvn/
 /workspace/acme-net/mvnv/
 /workspace/acme-net/mvnw
+/docs/.settings/
+.project
