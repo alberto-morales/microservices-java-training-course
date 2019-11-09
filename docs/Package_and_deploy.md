@@ -106,8 +106,7 @@ Before deploying the application into a Docker container, we will first package 
 
 On the first step, we need to build a container image. For this, we start with creating a  `Dockerfile`  in the project root directory as follows:
 
-```file
-# latest oracle openjdk is the basis  
+```file	 
 FROM openjdk:oracle   
 
 VOLUME /tmp
