@@ -106,19 +106,22 @@ Before deploying the application into a Docker container, we will first package 
 
 On the first step, we need to build a container image. For this, we start with creating a  `Dockerfile`  in the project root directory as follows:
 
-```file
-# latest oracle openjdk is the basis  
-FROM openjdk:oracle# copy jar file into container image under app directory  
+```file	 
+FROM openjdk:oracle   
 
-COPY target/acme-bank-0.0.1-SNAPSHOT.jar app/acme-bank.jar # expose server port accept connections  
+VOLUME /tmp
 
-EXPOSE 8081 # start application  
+COPY target/acme-bank-0.0.1-SNAPSHOT.jar app/acme-bank.jar   
+
+EXPOSE 8081  
 
 CMD ["java", "-jar", "app/acme-bank.jar"]
 ```
 These are the four steps for that will create an image of our Java application to be able to run Docker.
 
 Note that, in the above snippet, we assumed that the application JAR file `acme-bank-0.0.1-SNAPSHOT.jar`  is located under the target directory of our project. We also assumed that the embedded servlet port is 8081.
+
+Before proceeding further, verify you can run docker commands from the shell.
 
 We can now build the Docker image with the following command (from where the Dockerfile is located):
 
