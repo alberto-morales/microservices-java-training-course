@@ -1,9 +1,9 @@
-FROM openjdk:oracle# copy jar file into container image under app directory  
+FROM openjdk:oracle   
 
 VOLUME /tmp
 
-COPY target/acme-bank-0.0.1-SNAPSHOT.jar app/acme-bank.jar # expose server port accept connections  
+COPY target/acme-bank-0.0.1-SNAPSHOT.jar app/acme-bank.jar   
 
-EXPOSE 8081 # start application  
+EXPOSE 8081  
 
 CMD ["java", "-jar", "app/acme-bank.jar"]
