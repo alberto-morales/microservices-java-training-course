@@ -1,31 +1,48 @@
-# RESTful  Web Services, persistence and entity classes
+# Communication Between Microservices
 
 ## Introduction
 
-The goal of this session is to provide you full autonomy exposing RESTful services with Spring Boot, Spring data and JPA access data stored in a relational database.
- 
-The goal of this session is to have every attendee create a small project, to build with and understand the technology and how 
-developers can take advantage of it in their daily workflow.
+The goal of this session is to have every attendee create bunch of small services, talking to each other, 
+as well as learn the basic patterns about inter-service communication for microservices, 
+and getting familiar with supporting technologies.
 
-The goal of the session was to take a WebClient and update it to work asynchronously with live code.
+## Communication Between Microservices
 
-https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-16-04-es
+The overall idea of this architectural style is to implement an application as a system of services.
+In an ideal world, applications that require the implementation of several independent tasks which didn't interact with each other, should be the case.
+But in my experience, that only rarely happens. There are also tasks that are more complex, and that can't be easily implemented in an independent service which doesn't use any other parts of the system.
 
-The goal of this session is to achieve full autonomy by installing and configuring Airflow with a standard and easy configuration 
-(but effective for most projects), as well as learn the basic functionalities about workflows creation and getting familiar with 
-Airflow web interface.
+In these cases, your microservices need to communicate with each other.
 
-This introduction will explain the basics concepts of Airflow using a business case that will be developed during this session.
+This session will explain the basics concepts and patterns of inter-service communication for microservices using a business case that will be developed during this session.
 
-This case study is the creation of a pipeline that, using this dataset about High Speed train tickets, try to predict its price
-and cluster the ticket belong (two models, one supervised and other unsupervised have been training before, and are available through
-different endpoints).
+### Case study: bank cards authorization
+This case study is the creation of a "complex pipeline" that, using a bunch of microservices, simulates the workflow of bank cards authorization.
 
-1. Mocks user alarms for Renfe tickets. Those alarms are just a ticket scrapped in a very particular point of time we want to track.
-2. Predicts future (next week price), and compare to original price.
-3. Perform a clustering of ticket (just for learning purposes).
+Whenever a cardholder uses a credit or debit card in a purchase, the acquiring bank(*) either authorizes or rejects the transaction based on the data from the issuing bank(**) and card network. In short, the acquiring bank receives the payment authorization request from the merchant and then sends it to the issuing bank for approval. If the purchase is approved, the funds are deposited into the merchant's account (usually at regular intervals).
 
-## Spring Boot: motivation, advantages and disadvantages
+(*) The acquirer, also known as a credit card bank, merchant bank or acquirer, is a bank or financial institution, licensed as a member of a card association (like Visa or MasterCard), that creates and maintains the merchant's bank account. 
+(**) The issuing bank, as the term goes, is a bank that issues credit and debit cards to consumers.
+
+## Two ways of communication
+
+Microservices are all about separation of concerns and decoupling independent services. But how does communication between those services work?
+
+In a microservices architecture, it is possible to distinguish two ways of communications between the microservices:
+
+* Synchronous: a microservice directly calls the other microservice and requires an immediate response, which results in dependency between the services.
+or web application communication, the HTTP protocol has been the standard for many years, and that is no different for microservices. It is a synchronous, stateless protocol.
+In synchronous communication, the client sends a request and waits for a response from the service. However, using that protocol, the client can communicate asynchronously with a server, which means that a thread is not blocked, and the response will reach a callback eventually. An example of such a library, which provides the most common pattern for synchronous REST communication,is Spring Cloud Netflix.
+
+![Synchronous](./images/synchronous.png)
+
+* Asynchronous: a microservice directly/indirectly calls the other microservice and receive a non-immediate response in a new transaction. 
+ In most cases, such communication is realized with messaging brokers. The message producer usually does not wait for a response. It just waits for acknowledgment that the message has been received by the broker. 
+The responsible microservice takes all requests, processes it and returns the result to the caller in an asynchronous way. Local message queues can be used for this purpose, but often messaging frameworks like Apache Kafka, Apache ActiveMQ, RabbitMQ or any other scalable messaging solution provide the best capabilities to achieve guaranteed delivery.
+
+![Asynchronous - One to one](./images/asynchronous-one-to-one.png)
+
+![Publish - Subscribe](./images/publish-subscribe.png)
 
 ### Current situation and motivation for Spring Boot existance
 
