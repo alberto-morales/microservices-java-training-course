@@ -30,3 +30,5 @@ hs_err_pid*
 /docs/.settings/
 .project
 /workspace/gs-service-registration-and-discovery/
+/workspace/eureka-service/.mvn/
+/workspace/netflix-oss-spring-boot-example/

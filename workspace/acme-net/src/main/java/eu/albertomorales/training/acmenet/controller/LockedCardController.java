@@ -29,7 +29,7 @@ public class LockedCardController {
 	
 	@RequestMapping(value="/locked_cards", method = RequestMethod.GET)
     @ResponseBody
-    public List<LockedCard> getByPAN(@RequestParam(name="pan") String pan) {
+    public List<LockedCard> getByPAN(@RequestParam(name="pan", required=false) String pan) {
 		Iterable<LockedCardImpl> lockedCards = repository.findByPAN(pan);
     	List<LockedCard> result = new ArrayList<LockedCard>();
     	lockedCards.forEach(result::add);

@@ -3,21 +3,9 @@
 
 ## Introduction
 
-The goal of this session is to provide you full autonomy exposing RESTful services with Spring Boot, Spring data and JPA access data stored in a relational database.
- 
-The goal of this session is to achieve full autonomy by installing and configuring Airflow with a standard and easy configuration 
-(but effective for most projects), as well as learn the basic functionalities about workflows creation and getting familiar with 
-Airflow web interface.
+The goal of this session is to provide you full autonomy exposing RESTful services with Spring Boot, Spring data and JPA, accessing data stored in a relational database.
 
-This introduction will explain the basics concepts of Airflow using a business case that will be developed during this session.
-
-This case study is the creation of a pipeline that, using this dataset about High Speed train tickets, try to predict its price
-and cluster the ticket belong (two models, one supervised and other unsupervised have been training before, and are available through
-different endpoints).
-
-1. Mocks user alarms for Renfe tickets. Those alarms are just a ticket scrapped in a very particular point of time we want to track.
-2. Predicts future (next week price), and compare to original price.
-3. Perform a clustering of ticket (just for learning purposes).
+This case study is the creation of a service that, using data stored in a relational database, can give information about a Bank Entity - called ACME Bank - customers (CardsHolders and Issued Cards, will be available through different endpoints).
 
 ## Spring Boot: motivation, advantages and disadvantages
 
@@ -147,7 +135,7 @@ distributing tasks and distributed tasks.
 
 - RESTful  Web Services with Spring Boot [session](https://github.com/alberto-morales/microservices-java-training-course/blob/20191101-AcmeBankApplication/docs/RESTFul-Web-Service-Spring-Boot.md) finished.
 
-- SGBD (PostgreSQL	) installed.
+- SGBD (PostgreSQL) installed.
 We recommend to follow this [guide](http://www.postgresqltutorial.com/install-postgresql/) that illustrates the PostgreSQL installation proccess (at the current time we use PostgreSQL 12)
 
 ### Step 1: PostgreSQL admin tool installation
@@ -277,6 +265,7 @@ interface CardHolderRepository extends CrudREpository <CardHolder, Long> { â€¦ }
 And we have declared an aditional query method on the interface.
 
 Let's have a look at our `CardHolderRepoisitory`:
+
 ```java
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -294,7 +283,7 @@ public interface CardHolderRepository extends CrudRepository<CardHolderImpl, Lon
 }
 ```
 
-Here, we are done with the JPA and Spring data things â€” in other words, the DAO layer. 
+Here, we are done with the JPA and Spring data things, in other words, the DAO layer. 
 
 One more thing, update the PostgreSQL and hibernate settings in application.properties
 
@@ -371,7 +360,7 @@ public class CardHolderController {
 	private CardHolderRepository repository;	
 ```
 
-Now, the RESTful Service is ready to run. Start the application and execute the HTTP endpoints â€” that's it.
+Now, the RESTful Service is ready to run. Start the application and execute the HTTP endpoints, that's it.
 
 ![Service invocation - 1](./images/data-invokation-1.png)
 ![Service invocation - 2](./images/data-invokation-2.png)
@@ -388,6 +377,7 @@ New features belong to a new Spring Boot application, so the first step is to se
 
 ### Step 2: Adding the routing logic
 HTTP `POST` requests are used to create new resources (locked cards, in this case). The basic idea is to pull data out of the HTTP request body and use it to create a new row in the database. Let's create a new LockedCardController.java file and append the code that follows:
+
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -444,13 +434,14 @@ public class LockedCardController {
 
 }
 ```
-The LockedCardController save method function is to save "locked cards" items. Therefore, we need to have a locked card class, containing the entity properties. These properties should correspond to the columns in the â€œlocked_cards tableâ€.
+
+The LockedCardController save method function is to save "locked cards" items. Therefore, we need to have a locked card class, containing the entity properties. These properties should correspond to the columns in the "*locked_cards* table"€.
 
 ![entity-table-POST](./images/ilustracion-POST.png)
 
 You must create the database table and the entity + repository Java classes,  as described in the last unit.
 
-The POST requests can contain a payload known as "request bodyâ€. The payload contains the data that could be stored or updated. The payload is usually in JSON format.
+The POST requests can contain a payload known as "request body"€. The payload contains the data that could be stored or updated. The payload is usually in JSON format.
 
 Notice that the method responsible for handling HTTP POST requests needs to be annotated with @PostMapping (or RequestMapping + method = POST) annotation.
 

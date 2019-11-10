@@ -3,21 +3,17 @@
 
 ## Introduction
 
-The goal of this session is to achieve full autonomy by installing and configuring Airflow with a standard and easy configuration 
-(but effective for most projects), as well as learn the basic functionalities about workflows creation and getting familiar with 
-Airflow web interface.
+The goal of this session is to achieve full autonomy by setting up and configuring a Spring Boot application with a standard and easy configuration (but effective for most projects), as well as learn the fundamentals about REST APIs design and creation.
 
 It is expected that upon completion of the training session, participants will be able to:
 
-This introduction will explain the basics concepts of Airflow using a business case that will be developed during this session.
+ * Create a new Spring Boot Application.
+ * Make a REST endpoint to work.
+ * Distinguish between the diferent ways to receive parameters.
+ * Know the particularities of severals HTTP verbs, and choose between them.
+ * Use different tools to invoke services (curl, Postman).
 
-This case study is the creation of a pipeline that, using this dataset about High Speed train tickets, try to predict its price
-and cluster the ticket belong (two models, one supervised and other unsupervised have been training before, and are available through
-different endpoints).
-
-1. Mocks user alarms for Renfe tickets. Those alarms are just a ticket scrapped in a very particular point of time we want to track.
-2. Predicts future (next week price), and compare to original price.
-3. Perform a clustering of ticket (just for learning purposes).
+The first drill is about a simple pong service that just greets when invoked.
 
 ## Spring Boot Applications
 
@@ -25,123 +21,54 @@ Spring Boot is a framework that eases the development of web applications. It ha
 
 ### Current situation and motivation for Spring Boot existance
 
-Currently the management and orchestration of processes has been carried out using various tools and methodologies, for example:
+Spring Boot Framework is not implemented from the scratch by The Spring Team, rather than implemented on top of existing Spring Framework (Spring IO Platform).
+It is not used for solving any new problems. It is used to solve same problems like Spring Framework.
 
-* Shell scripts.
-* Python scripts.
-* R scripts.
-* Jupyter Notebooks.
-* Cron
-* Oozie
+![Spring Boot](./images/spring-boot.png)
 
-At the same time, the Data practice has evolved due to:
+*Why Spring Boot?*
 
-* More data accumulated by companies. They want to use that data.
-* Companies whose activity was not oriented to the storage and exploitation of the data from the beginning, but that 
-    want to invest and transform into data-oriented organizations.
-* Data accumulated in very heterogeneous sources (relational databases, Big Data infrastructure, cloud infrastructure).
-
-All this causes an increasing complexity when working with data and designing processes for its exploitation:
-
-* It is more complicated and critical to monitor (executions, failures).
-* It is more complicated to find bugs and fix them (search the logs, etc.).
-* It is more complicated to maintain the processes and introduce changes without affecting critical parts.
-
-Apache Airflow has gained great popularity in the coming years, especially due to the rise of Data projects using Machine 
-Learning libraries written in Python or whose main API is in Python, which is becoming the 
-[reference language] (https://stackoverflow.blog/2017/09/06/incredible-growth-python/) in the field of data analysis 
-and artificial intelligence (sorry R).
-
-If programming languages were divided in terms of their efficiency and
-[speed] (http://www.bioinformatics.org/benchmark/results.html) in execution, 
-there would be 3 distinct groups:
-
-1. Fast languages: C, C ++, Fortran.
-2. Languages with intermediate speed: Java, Scala.
-3. Slow languages: Python, Ruby, Perl.
-
-Most of the code written in Python for scientific computing and data analysis, uses under the hood extensions 
-in C or C ++ (as in the case of NumPy or Tensorflow). Python does a good job as a wrapper and nexus of
-code written in other (faster) languages. At the same time, its learning curve is reduced compared to
-other languages, so it attracts users with little experience in programming and software development, but with
-solid knowledge about data analytics. Growth in recent years has been exponential.
-
-![Python growth over time](./images/python.png)
+* To ease the Java-based applications Development, Unit Test and Integration Test Process.
+* To reduce Development, Unit Test and Integration Test time by providing some defaults.
+* To increase Productivity.
 
 ## Spring Boot Introduction
 
 ### Spring Boot features
 
-Python properties as a 'glue' language fit perfectly with the concept proposed by Apache Airflow, that is why its 
-use has increased since its [release](https://airbnb.io/projects/airflow/) by the AirBnB engineering team.
+*Advantages of Spring Boot:*
 
-Apache Airflow is defined as:
-
-> A platform to programmatically author, schedule and monitor workflows.
-
-The main features of Apache Airflow are the following:
-
-* Usability
-     * Web interface.
-     * Creation and use of connections with diverse infrastructure.
-     * Review of logs of each task independently.
-     * Visualization of the executed code in each task.
-* Robustness:
-     * Task retry management.
-     * Dependency between tasks.
-* Elegant:
-     * Definition of execution graphs (DAGs) as .py files
-     * Minimum knowledge about scripting required.
-     
-### Spring Boot operating scheme
-     
-Airflow consists of 4 main components.
-
-* Webserver:
-     * Process monitoring and visualization.
-     * Query execution logs.
-     * Definition of 'connections'.
-* Scheduler:
-     * Launching tasks and processes at the right time and order.
-* Metadata database:
-     * Storage of the status of tasks and processes: queued, running, retrying, finished, failed.
-     * Storage of connections, users, passwords, etc.
-* Worker (optional):
-     * This component is responsible for executing the tasks offering additional functionalities to the execution by 
-     default. These additional functionalities usually have to do with the distribution of the execution.
-        
+* It is very easy to develop Spring Based applications with Java or Groovy.
+* It reduces lots of development time and increases productivity.
+* It avoids writing lots of boilerplate Code, Annotations and XML Configuration.
+* It is very easy to integrate Spring Boot Application with its Spring Ecosystem like Spring JDBC, Spring ORM, Spring Data, Spring Security etc.
+* It follows "Opinionated Defaults Configuration" Approach to reduce Developer effort
+* It provides Embedded HTTP servers like Tomcat, Jetty etc. to develop and test our web applications very easily.
+* It provides CLI (Command Line Interface) tool to develop and test Spring Boot(Java or Groovy) Applications from command prompt very easily and quickly.
+* It provides lots of plugins to develop and test Spring Boot Applications very easily using Build Tools like Maven and Gradle
+* It provides lots of plugins to work with embedded and in-memory Databases very easily.
+	        
 ### Main components of Spring Boot
 
-The main components of Spring Boot are the following:
+Spring Boot Framework has mainly four major components:
 
-* DAG: Acronym for Directed Acyclic Graph: it is a set of tasks arranged according to a certain 
-dependence between them and that are executed with a certain periodicity.
-* Tasks: execution units.
-* Operators: define the type of task. They are subdivided into three types:
-    * Operators: execute some arbitrary action.
-    * Transfers: move information between different locations.
-    * Sensors: wait for changes in the system to start the execution.
- * Hooks: communication interfaces with the infrastructure.
- * Plugins: extensions of all the previous elements.
- 
+* Spring Boot Starters: basically groups the related or transitive dependencies into single dependency.
+* Spring Boot AutoConfigurator: the main purpose is to reduce the configurations as it was needed in Spring framework.
+* Spring Boot CLI: this tool is used to run and test the Spring Boot application from command prompt.
+* Spring Boot Actuator. Two major features or responsibility of this component is :
+    - To provide Management EndPoints to Spring Boot Applications.
+    -  Spring Boot Application Metrics. 
+
 ### Ways to create a Spring Boot project.
 
-There is a big difference in the way processes are executed in Apache Airflow. The element that performs the execution 
-of the end of tasks in Airflow is called executor. There are several types of executors, each with their strengths
-and drawbacks:
+There are multiple approaches to create Spring Boot project. We can use any of the following approach to create application.
 
-* Sequential executor: is the default executor of Apache Airflow. It is characterized by executing tasks sequentially 
-(without any parallelization). It is good for prototyping processes and developing.
-* Local executor: uses Python built-in multiprocessing library. Its great advantage is that it does not require any 
-external elements to work and supports parallelization of tasks in a local machine. It is a good option when airflow 
-tasks needs some processing power and scheduler is on a single computer.
-* [Celery](http://www.celeryproject.org/) executor: Celery is by definition a distributed task queue. Its
-main feature is that it allows to distribute the tasks by several machines that are coordinated with the help of a 
-broker like Redis or RabbitMQ.
-* [Dask](https://dask.org/) executor: Dask has been one of the great revelations in the analytical community that allow 
-to distribute Python natively. Its main feature is that beyond distributing tasks by certain components of a cluster, 
-Dask distributes the tasks themselves, using distributed arrays of pandas and numpy. Please note the difference between
-distributing tasks and distributed tasks.
+- Spring Starter Project Wizard
+- Spring Maven Project
+- Spring Initializr
+- Spring Boot CLI
+
+Here for all the units, we are using STS (Spring Tool Suite) IDE to create project. Creating project by using IDE is always a convenient way.
 
 ## Spring Boot project 
 
@@ -152,12 +79,13 @@ Download the latest JDK from [here](http://www.oracle.com/technetwork/java/javas
 
 - IDE (Eclipse)
 We recommend to follow this [guide](https://www.eclipse.org/downloads/packages/installer)
-that illustrates the use of Eclipse Installer (at the current time we use Eclipse Installer 2019-09 R)
-!RESTful Web Services](./images/Eclipse-install-1.png)
+that illustrates the use of Eclipse Installer (at the current time we use Eclipse Installer 2019-09 R).
+
+![RESTful Web Services](./images/Eclipse-install-1.png)
 
 ### Step 1: Spring Tools for Eclipse IDE installation
 
-You can install the Spring Tools for Eclipse IDE into an existing Eclipse installation using the Eclipse Marketplace. Just open the marketplace client in Eclipse, search for Spring Tools and install the â€œSpring Tools (aka Spring IDE and Spring Tool Suite)â€ entry.
+You can install the Spring Tools for Eclipse IDE into an existing Eclipse installation using the Eclipse Marketplace. Just open the marketplace client in Eclipse, search for Spring Tools and install the Spring Tools (aka Spring IDE and Spring Tool Suite)€ entry.
 
 ![RESTful Web Services](./images/Eclipse-install-2.png)
 
@@ -167,7 +95,7 @@ Once the setup of all requirements has been satisfied, a java project for the Sp
 
 Let's start: 
 
-First, from the File menu select "New"  and then "other" and from wizard expand "Spring Boot" and select â€˜Spring Starter Projectâ€™ (File->New->other->wizard->Spring Starter Project)
+First, from the File menu select *"New"*  and then *"other"* and from wizard expand *"Spring Boot"* and select *"€˜Spring Starter Project"*€™ (*File->New->other->wizard->Spring Starter Project*)
 
 Select next and provide the below information 
 
@@ -230,7 +158,7 @@ public class Pong {
 ```
 So the above `Pong` class is a resource representation class for a pong message. Spring uses the Jackson JSON library to automatically marshal instances of type `Pong` into JSON.
 
-Now we will introduce a controller and that will serve `Pong`. In Springâ€™s approach to building RESTful web services, HTTP requests are handled by a controller. Controller `classes/components` are easily identified by the `@RestController` annotation, and the below PongController will handle GET requests for `/pong/user` by returning a new instance of the `Pong` class.
+Now we will introduce a controller and that will serve `Pong`. In Spring approach to building RESTful web services, HTTP requests are handled by a controller. Controller `classes/components` are easily identified by the `@RestController` annotation, and the below PongController will handle GET requests for `/pong/user` by returning a new instance of the `Pong` class.
 
 Now just follow next steps: create the package `eu.albertomorales.training.acmebank.controller`, add the class `PongController` to it and import the class `Pong`.
 
@@ -258,7 +186,7 @@ private static final String welcomemsg = "Pong Mr. %s!";
 ```
 The `@RequestMapping` annotation maps all HTTP operations by default and, in this example, it ensures that HTTP requests to `/pong/user` are mapped to the `pongUser()` method.
 
-Now we are done with everything for a GET RESTful call. Letâ€™s test this application first. After the test, we will learn about POST calls as well.
+Now we are done with everything for a GET RESTful call. Let's test this application first. After the test, we will learn about POST calls as well.
 
 To compile this project with Maven, we will add the below information into the POM file:
 
@@ -324,9 +252,11 @@ private static final String pongMsg = "Pong Mr./Ms. %s!";
 ```
 When would you use `@PathVariable` vs `@QueryParam`? This is a "best practices" or convention question.
 REST may not be a standard as such, but reading up on general REST documentation and blog posts should give you some guidelines for a good way to structure API URLs. Most rest APIs tend to only have resource names and resource IDs in the path. Such as:
-```
+
+```URL
 /departments/{dept}/employees/{id}
 ```
+
 Some REST APIs use query strings for filtering, pagination and sorting, but Since REST isn't a strict standard I'd recommend checking some REST APIs out there such as github and stackoverflow and see what could work well for your use case.
 
 I'd recommend putting any required parameters in the path, and any optional parameters should certainly be query string parameters. Putting optional parameters in the path will end up getting really messy when trying to write URL handlers that match different combinations.
