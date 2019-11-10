@@ -194,8 +194,8 @@ talking to each other.
 
 ** Changes in acme-bank project **
 
-1. Add *@EnableEurekaClient* annotation on AcmeBankApplication class.
-2. Add Eureka server configuration elements on application.properties file.
+* 1. Add *@EnableEurekaClient* annotation on AcmeBankApplication class.
+* 2. Add Eureka server configuration elements on application.properties file.
 
 ```properties
 ## Eureka
@@ -203,7 +203,7 @@ eureka.client.serviceUrl.defaultZone  = http://localhost:8761/eureka
 spring.application.name=acme-bank-services
 ```
 
-3. Code IssuerAuthorizationController
+* 3. Code IssuerAuthorizationController
 
 ```java
 import java.time.LocalDateTime;
@@ -237,7 +237,7 @@ public class IssuerAuthorizationController {
 
 (IssuerAuthorizationRequest and IssuerAuthorizationResponse DTO's needed)
 
-4. Add dependencies to spring-cloud on *pom.xml* 
+* 4. Add dependencies to spring-cloud on *pom.xml* 
 
 ```xml
 
@@ -274,8 +274,8 @@ public class IssuerAuthorizationController {
 
 ** Changes in acme-net project **
 
-1. Add *@EnableFeignClients* and *@EnableEurekaClient* on AcmeNetApplication class.
-2. Add Eureka server configuration elements on application.properties file.
+* 1. Add *@EnableFeignClients* and *@EnableEurekaClient* on AcmeNetApplication class.
+* 2. Add Eureka server configuration elements on application.properties file.
 
 ```properties
 ## Eureka
@@ -283,7 +283,7 @@ eureka.client.serviceUrl.defaultZone  = http://localhost:8761/eureka
 spring.application.name=acme-net-services
 ```
 
-3. Code IssuerAuthorizationRestClient
+* 3. Code IssuerAuthorizationRestClient
 
 ```java
 import org.springframework.cloud.openfeign.FeignClient;
@@ -305,7 +305,7 @@ public interface IssuerAuthorizationRestClient {
 }
 ```
 
-4. Code AcquirerAuthorizationController
+* 4. Code AcquirerAuthorizationController
 
 ```java
 import java.time.LocalDateTime;
@@ -359,7 +359,7 @@ public class AcquirerAuthorizationController {
 
 (AcquirerAuthorizationRequest, AcquirerAuthorizationResponse, IssuerAuthorizationRequest and IssuerAuthorizationResponse DTO's needed)
 
-5. Add dependencies to spring-cloud on *pom.xml* 
+* 5. Add dependencies to spring-cloud on *pom.xml* 
 
 ```xml
 
