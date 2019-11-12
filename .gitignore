@@ -21,3 +21,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/workspace/acme-bank/.mvn/
+/workspace/.metadata/
+/workspace/spring-data-jpa-postgresql/
+/workspace/acme-net/.mvn/
+/workspace/acme-net/mvnv/
+/workspace/acme-net/mvnw
+/docs/.settings/
+.project
