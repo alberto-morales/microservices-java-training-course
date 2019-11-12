@@ -1,0 +1,13 @@
+
+CREATE TABLE locked_cards (ID INTEGER NOT NULL PRIMARY KEY,
+pan CHAR(16) NOT NULL,
+reason CHAR(3) NOT NULL, 
+comment VARCHAR
+);
+
+CREATE SEQUENCE hibernate_sequence;
+
+GRANT ALL PRIVILEGES ON DATABASE acme_net TO PUBLIC;
+GRANT ALL PRIVILEGES ON TABLE locked_cards TO acme;
+GRANT ALL PRIVILEGES ON SEQUENCE hibernate_sequence TO acme;
+	
