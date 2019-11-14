@@ -2,6 +2,8 @@ package eu.albertomorales.training.acmebank.controller;
 
 import eu.albertomorales.training.acmebank.dto.Pong;
 
+import java.util.Date;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,7 @@ private static final String pongMsg = "Pong Mr./Ms. %s!";
     @ResponseBody
     public ResponseEntity<Pong> pongUser(@PathVariable(name = "name", required = false) String name) {
         String username = StringUtils.isEmpty(name) ? "Trainee" : name;
+        System.out.println(new Date() + " '" + username + "'");
         return ResponseEntity.ok().body(new Pong(String.format(pongMsg, username)));    	
     }
     
