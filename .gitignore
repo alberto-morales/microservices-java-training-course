@@ -29,6 +29,4 @@ hs_err_pid*
 /workspace/acme-net/mvnw
 /docs/.settings/
 .project
-/workspace/gs-service-registration-and-discovery/
-/workspace/eureka-service/.mvn/
-/workspace/netflix-oss-spring-boot-example/
+/workspace/eureka-service/target/
