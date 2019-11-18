@@ -1,6 +1,9 @@
 package eu.albertomorales.training.acmebank.controller;
 
 import eu.albertomorales.training.acmebank.dto.Pong;
+import eu.albertomorales.training.acmebank.util.LoadGenerator;
+
+import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +24,17 @@ private static final String pongMsg = "Pong Mr./Ms. %s!";
     @ResponseBody
     public ResponseEntity<Pong> pongUser(@PathVariable(name = "name", required = false) String name) {
         String username = StringUtils.isEmpty(name) ? "Trainee" : name;
+        //
+        int numCore = 2;
+        int numThreadsPerCore = 2;
+        double load = 0.5;
+        final long duration = 1000;
+        simulator.generateLoad(numCore, numThreadsPerCore, load, duration);
+        //
+        System.out.println(new Date() + " '" + username + "'");
         return ResponseEntity.ok().body(new Pong(String.format(pongMsg, username)));    	
     }
+    
+    private LoadGenerator simulator = new LoadGenerator();
     
 }
