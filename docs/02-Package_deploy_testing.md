@@ -232,6 +232,8 @@ Step6: Save and run the Pong success testcase.
 
 ![Running test case](./images/jmeter-7.png)
 
+There are various reports available in JMeter. We can use them based on the project needs.
+
 ## Summary
 
 The Spring Boot Application is running from the Docker container. Spring Boot App runs on port 8081 inside the container by default and we mapped that to the same port on the host using "-p" on the command line.
