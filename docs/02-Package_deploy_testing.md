@@ -224,7 +224,7 @@ Stemp 4: Pong success—> Right click —>Add—>Assertion — >Response Assertion
 
 In response assertion add patterns to be tested, and rename it as "Response code assertion"
 
-Step 5 : Threadgroup–>Add–>Listener–> View Results Tree
+Step 5 : Threadgroup–>Add–>Listener–> Aggregate report
 
 ![Adding view result Tree](./images/jmeter-6.png)
 
