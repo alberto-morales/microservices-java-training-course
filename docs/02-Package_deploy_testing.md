@@ -1,9 +1,11 @@
 
-# Package and deploy Spring Boot Applications
+# Package, deploy and test Spring Boot Applications
 
 ## Introduction
 
 The goal of this session is for attendees to have all the tools to start using Docker in their day to day work, for services deployment.
+
+API Testing using Apache JMeter testing framework would serve as a bonus track for this training session.
  
 We have provided a virtual machine with Docker installed. If you are curious about the installation process, you can get a glimpse of the following link forehand:
  [How to install docker on Ubuntu ](https://medium.com/@Grigorkh/how-to-install-docker-on-ubuntu-16-04-3f509070d29c)
@@ -57,8 +59,8 @@ Spring Boot applications can be deployed into production systems with several me
 -   Deploying in Java Archive (JAR) as a standalone application.
 -   Deploying in Docker Container.
 -   Deploying as Web Application Archive (WAR) into a servlet container.
--   Deploying behind NGINX web server â€” direct setup,
--   Deploying behind NGINX web server â€” containerized setup.
+-   Deploying behind NGINX web server - direct setup,
+-   Deploying behind NGINX web server - containerized setup.
 -   .. Kubernetes ... Open Shift ... Cloud...
 
 In this session, we will go through step by step deployment of Spring Boot applications via the first 2 methods.
@@ -75,7 +77,7 @@ We have successfully created and run the application in the embedded server of t
 ### Step 1: Deploying in Java Archive (JAR) as a standalone application.
 
 Spring Boot applications can easily be packaged into JAR files and deployed as standalone applications. 
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org/) is included here. If you a€™re not familiar with Maven, refer to [Building Java Projects with Maven](https://spring.io/guides/gs/maven). This is done by the *spring-boot-maven-plugin*. The plugin is automatically added to *pom.xml* once the Spring project is created via  [Spring Initializr](https://start.spring.io/) as a Maven project.
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org/) is included here. If you are not familiar with Maven, refer to [Building Java Projects with Maven](https://spring.io/guides/gs/maven). This is done by the *spring-boot-maven-plugin*. The plugin is automatically added to *pom.xml* once the Spring project is created via  [Spring Initializr](https://start.spring.io/) as a Maven project.
 
 ```xml
 ...
@@ -118,7 +120,6 @@ To run the jar file, use the following standard JVM command `java -jar <jar-file
 
 
 ### Step 2. Deploying in Docker Container
-
 
 Before deploying the application into a Docker container, we will first package the application in a (fat) JAR file. This process is previously explained, therefore we will assume you have a jar file.
 
@@ -188,6 +189,48 @@ To tag an image, we use the docker tag command:
 Push the image to docker hub:
 
 Finally, use the docker push command to push the tagged image to docker hub .
+
+## API testing using JMeter
+
+As a bonus track, we show the basics of creating performance tests for Spring Boot applications using JMeter. 
+
+JMeter is one of the most popular performance testing tools in the industry. 
+With this software you can perform load test, performance-oriented business (functional) test, regression test, etc., on different protocols or technologies.
+
+Step 1 : Create new test plan —>Right click—> Add —>Threads—> Thread group
+
+![Adding thread group](./images/jmeter-1.png)
+
+1. Set the number of threads (users) to 150 – We will have 150 users executing the test plan.
+2. Set the Ramp-up period (in seconds) to 1 – The Ramp-up period tells JMeter about the length of delay before dealing with the next user.
+3. Set the Loop count to 50 – number of times to execute the test.
+
+Step 2: Thread group —>Right click —>Add —>Logic controller —> Simple controller
+
+![Adding simple controller](./images/jmeter-2.png)
+
+Simple controllers are just containers for user requests.
+
+Step 3 : Simple controller—> Right click —>Add—>Sampler — >Http  Sampler Request
+
+![Adding HTTP sampler request](./images/jmeter-3.png)
+
+Create a GET method request, and rename it as “Pong success”.
+
+Stemp 4: Pong success—> Right click —>Add—>Assertion — >Response Assertion
+
+![Adding response assertion](./images/jmeter-4.png)
+![Setting response assertion configuration](./images/jmeter-5.png)
+
+In response assertion add patterns to be tested, and rename it as "Response code assertion"
+
+Step 5 : Threadgroup–>Add–>Listener–> View Results Tree
+
+![Adding view result Tree](./images/jmeter-6.png)
+
+Step6: Save and run the Pong success testcase.
+
+![Running test case](./images/jmeter-7.png)
 
 ## Summary
 
