@@ -417,4 +417,11 @@ How to stitch microservice modules working together?
 
 ![Orchestation v.s. Choreography](./images/orchestation-vs-choreography.png)
 
-<div align="center" size="100%"><h6><sub>Orchestration vs. Choreography, Source: <i>www.thoughtworks.com</i></sub></h6><div/>
+<div align="center" size="100%"><h6><sub>Orchestration vs. Choreography, Source: <i>www.thoughtworks.com</i></sub></h6></div>
+
+## Bibliography
+
+![Building microservices - Sam Newman](./images/building-microservices-sam-newman.png)
+
+
+Building microservices is a 2015 book by Sam Newman. It's a practical book that covers the topics that system architects and administrators must consider when building, managing, and evolving microservice architectures.
