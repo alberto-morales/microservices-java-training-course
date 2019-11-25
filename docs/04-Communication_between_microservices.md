@@ -14,63 +14,40 @@ In these cases, your microservices need to communicate with each other.
 
 This session will explain the basics concepts and patterns of inter-service communication for microservices using a business case that will be developed during this session.
 
-### Case study: bank cards authorization
-This case study is the creation of a "complex pipeline" that, using a bunch of microservices, simulates the workflow of bank cards authorization.
-
-Whenever a cardholder uses a credit or debit card in a purchase, the acquiring bank(*) either authorizes or rejects the transaction based on the data from the issuing bank(**) and card network. In short, the acquiring bank receives the payment authorization request from the merchant and then sends it to the issuing bank for approval. If the purchase is approved, the funds are deposited into the merchant's account (usually at regular intervals).
-
-(*) The acquirer, also known as a credit card bank, merchant bank or acquirer, is a bank or financial institution, licensed as a member of a card association (like Visa or MasterCard), that creates and maintains the merchant's bank account. 
-(**) The issuing bank, as the term goes, is a bank that issues credit and debit cards to consumers.
-
 ## Two ways of communication
 
 Microservices are all about separation of concerns and decoupling independent services. But how does communication between those services work?
 
 In a microservices architecture, it is possible to distinguish two ways of communications between the microservices:
 
-* Synchronous: a microservice directly calls the other microservice and requires an immediate response, which results in dependency between the services.
-On web application communication, the HTTP protocol has been the standard for many years, and that is no different for microservices. It is a synchronous, stateless protocol.
-In synchronous communication, the client sends a request and waits for a response from the service. However, using that protocol, the client can communicate asynchronously with a server, which means that a thread is not blocked, and the response will reach a callback eventually. An example of such a library, which provides the most common pattern for synchronous REST communication,is Spring Cloud Netflix.
+- Synchronous: Client sends a request and waits for a response. Client code execution itself may prefer to receive the response via a callback (thread is not blocked) or wait (thread is blocked). Either way, the communication to the external world is synchronous.
+- Asynchronous: Client sends a request and doesn't wait for a response.
 
-![Synchronous](./images/synchronous.png)
-
-* Asynchronous: a microservice directly/indirectly calls the other microservice and receive a non-immediate response in a new transaction. 
- In most cases, such communication is realized with messaging brokers. The message producer usually does not wait for a response. It just waits for acknowledgment that the message has been received by the broker. 
-The responsible microservice takes all requests, processes it and returns the result to the caller in an asynchronous way. Local message queues can be used for this purpose, but often messaging frameworks like Apache Kafka, Apache ActiveMQ, RabbitMQ or any other scalable messaging solution provide the best capabilities to achieve guaranteed delivery.
-
-![Asynchronous - One to one](./images/asynchronous-one-to-one.png)
-
-![Publish - Subscribe](./images/publish-subscribe.png)
 
 ## Working with synchronous communication: How to Use Netflix's Eureka and Spring Cloud for Service Registry
 
-### Introduction 
+### Netflix OSS
 
-For today, your microservices need to communicate with each other. But that sounds a lot easier than it seems. As soon as your services need to interact with each other, you can't any longer ignore that you're building a distributed system.
+![Netflix OSS](./images/netflix-OSS.png)
 
-** Problems of distributed systems **
+What does (Netflix) OSS stands for? [Netflix OSS](https://netflix.github.io/) is nothing but Open Source Software contributed by Netflix Team, to the Open Source Community.
 
-Some of them:
+The code helps developers handle several aspects of cloud platform development, such as big data analytics, storing and serving data in the cloud, improving
+performance, and ensuring security at scale.
 
-* Eventual Consistency: Microservices introduce eventual consistency issues because of their insistence on decentralized data management.
+Here we focus on some of the most popular Netflix OSS projects for building microservices architectures:
 
-![Eventual Consistency](./images/eventual-consistency.jpg)
+* [Archaius](https://github.com/Netflix/archaius) is a Java library for distributed configuration.
+* [Eureka](https://github.com/Netflix/eureka) is a REST-based registry service that features the Eureka Client, a Java-based client component that improves interactions with the service.
+* [Hystrix](https://github.com/Netflix/hystrix) is a latency and fault tolerance library, as a means to control the interactions between microservices.
+* [Ribbon](https://github.com/Netflix/ribbon) is a client-side inter-process communication (IPC) library which
+* [Zuul](https://github.com/Netflix/zuul) is the glue holding together the Netflix microservices architecture. Netflix uses Zuul as a gateway service for its streaming application and the Netflix API. Among its functions are dynamic routing, canary and stress testing, load shedding, static response handling, authentication and security, and insights and monitoring.
 
-* Independent Deployment: A key principle of microservices is that services are components and thus are independently deployable.
+Do you dare to download and dive into [ZeroToDocker](https://github.com/Netflix-Skunkworks/zerotodocker) ?
 
-* Operational Complexity: Half-a-dozen applications now turn into hundreds of little microservices
+![ZeroToDocker](./images/zero-to-docker.png)
 
-* Technology Diversity: Since each microservice is an independently deployable unit, you have considerable freedom in your technology choices within it.
-
-* Performance... Fault Tolerance ... Logging and Monitoring... 
-
-You can read these matters in great depth [here](https://martinfowler.com/articles/microservice-trade-offs.html#distribution) from the master Fowler.
-
-*"Eureka is a REST (Representational State Transfer) based service that is primarily used in the AWS cloud for locating services for the purpose of load balancing and failover of middle-tier servers."* - Netflix: Eureka at a Glance, Github
-
-Let's get to setting up this Eureka service registry and a couple of services to see it in practice.
-
-**Service Registration and Discovery with Netflix Eureka**
+### Service Registration and Discovery with Netflix Eureka 
 
 One of the problems of micro-service architecture is that how to find all other service endpoints.
 
@@ -79,6 +56,8 @@ One of the problems of micro-service architecture is that how to find all other 
 Netflix Eureka is a lookup server (also called a registry). All micro-services (Eureka clients) in the cluster register themselves to this server.There are other service discovery clients like Consul, Zookeeper etc, but we will be using Eureka in this training course. 
 
 The Client lives within the Service Instance ecosystem. It can be used as embedded with the Service or as a sidecar process. The Client and the Server implement a heartbeat protocol. The Client must send regular heartbeats to the Server. The Server expects these heartbeat messages in order to keep the instance in the registry and to update the instance info, otherwise the instance is removed from the registry. The time frames are configurable.
+
+Let's get to setting up this Eureka service registry and a couple of services to see it in practice.
 
 ### Setting Up the Eureka Server
 
@@ -175,13 +154,19 @@ logging.level.com.netflix.discovery=OFF
 Start the spring boot application. Use the below endpoint to view the eureka server dashboard.
 ![Eureka Server dashboard](./images/eureka-service-2.png)
 
-### Talking to the registry
+### Case study: bank cards authorization
+This case study is the creation of a "complex pipeline" that, using a bunch of microservices, simulates the workflow of bank cards authorization.
 
-Having spring-cloud-starter-netflix-eureka-client on the classpath makes the app into both a Eureka "instance" (that is, it registers itself) and a "client" (it can query the registry to locate other services).
+Whenever a cardholder uses a credit or debit card in a purchase, the acquiring bank(*) either authorizes or rejects the transaction based on the data from the issuing bank(**) and card network. In short, the acquiring bank receives the payment authorization request from the merchant and then sends it to the issuing bank for approval. If the purchase is approved, the funds are deposited into the merchant's account (usually at regular intervals).
 
-Don't forget the case study: 
+(*) The acquirer, also known as a credit card bank, merchant bank or acquirer, is a bank or financial institution, licensed as a member of a card association (like Visa or MasterCard), that creates and maintains the merchant's bank account. 
+(**) The issuing bank, as the term goes, is a bank that issues credit and debit cards to consumers.
 
 ![Authorization sequence](./images/authorization-sequence.png)
+
+**Talking to the registry**
+
+Having spring-cloud-starter-netflix-eureka-client on the classpath makes the app into both a Eureka "instance" (that is, it registers itself) and a "client" (it can query the registry to locate other services).
 
 Following the steps described below can help get you up and running quickly with both a:
 
@@ -397,3 +382,4 @@ public class AcquirerAuthorizationController {
 		</dependencies>
 	</dependencyManagement>
 ```
+
