@@ -57,3 +57,12 @@ How to stitch microservice modules working together?
 ![Building microservices - Sam Newman](./images/building-microservices-sam-newman.png)
 
 Building microservices is a 2015 book by Sam Newman. It's a practical book that covers the topics that system architects and administrators must consider when building, managing, and evolving microservice architectures.
+
+![Agile Software Development - Robert C. Martin](./images/agile-software-development-principles-patterns-practices.png)
+
+The author includes OOD, UML, Design Patterns, Agile and XP methods with a detailed description of a complete software design for reusable programs in C++ and Java (2002)
+
+![Domain Driven Design - Eric Evans](./images/domain-driven-design-eric-evans.png)
+
+This is not a book about specific technologies. It offers readers a systematic approach to domain-driven design, presenting an extensive set of design best practices, experience-based techniques, and fundamental principles that facilitate the development of software projects facing complex domains (2003)
+
