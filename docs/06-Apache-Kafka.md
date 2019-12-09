@@ -138,16 +138,16 @@ Podemos listar los topics:
 ./bin/kafka-topics.sh --list --zookeeper lab
 ```
 
-Y para ilustrar su uso, ponemos en funcionamiento un productor 
+Y para ilustrar su uso, ponemos en funcionamiento un productor por consola:
 
 ```shell
 ./bin/kafka-console-producer.sh --broker-list lab:9092 --topic curso
 ```
 
-y un consumidor:
+y un consumidor, también por consola:
 
 ```shell
-./bin/kafka-console-producer.sh --broker-list lab:9092 --topic curso
+./bin/kafka-console-consumer.sh --bootstrap-server lab:9092 --topic curso --from-beginning
 ```
 
 ## Bibliography

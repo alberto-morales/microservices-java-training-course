@@ -31,3 +31,6 @@ hs_err_pid*
 .project
 /workspace/eureka-service/target/
 /workspace/tetris/
+.classpath
+/workspace/kafka-introduction/target/
+/workspace/kafka-introduction/.settings/
