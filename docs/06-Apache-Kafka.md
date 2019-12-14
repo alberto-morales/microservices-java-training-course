@@ -189,6 +189,16 @@ The first line gives a summary of all the partitions, each additional line gives
 
 ## Java producer & consumer
 
+Lets add the dependencies to the POM file
+
+```properties
+	<dependency>
+	    <groupId>org.apache.kafka</groupId>
+	    <artifactId>kafka_2.11</artifactId>
+	    <version>2.3.1</version>
+	</dependency>	
+```
+
 ### First Java producer:
 
 ```java
@@ -204,7 +214,7 @@ The first line gives a summary of all the partitions, each additional line gives
 	System.out.printf("Producer Record:(%d, %s, %d)\n",
    						 event.key(), event.value(),
         				 event.partition());		
-	producer.close();
+	producer.close();a	
 ```
 
 The necessary properties for the producer must be included using a Java properties. First of all, we instantiate a Kafka producer that uses the properties object.
@@ -219,7 +229,7 @@ Finally, the event is sent using the *send(...)* method.
 	
 private final String BOOTSTRAP_SERVERS = "192.168.1.80:9092";
 private final String TOPIC_NAME = "curso";
-private final String GROUP_ID = "KAfkaExampleConsumer";
+private final String GROUP_ID = "KafkaExampleConsumer";
 	
 private Consumer<Long, String> createConsumer() {
 	final Properties props = new Properties();
@@ -300,6 +310,85 @@ Let's answer the following questions:
 - If you start two consumers (with the same consumer group), why only one appears to work?
 - Ok, we have two consumers working, but... Why does it finish without proccessing all events?  
 
+## Kafka with Spring Boot
+
+First of all, we must add the below dependency to get started with Spring Boot and Kafka:
+
+```properties
+	<dependency>
+		<groupId>org.springframework.kafka</groupId>
+		<artifactId>spring-kafka</artifactId>
+	</dependency>
+```
+
+### First Spring Boot Kafka producer
+
+```java
+@Service
+public class KafkaTestProducer {
+	
+	@Autowired
+	private KafkaTemplate<String, String> kafkaTemplate;
+	
+	private final String TOPIC_NAME = "curso";
+	
+	public void send(String message) {
+	    kafkaTemplate.send(TOPIC_NAME, message);
+	}
+}
+```
+
+Create a Controller which will trigger the send message to the Kafka Topic (passing the message) using the KafkaTestProducer class
+
+```java
+@RestController
+public class KafkaTestController {
+
+	@Autowired
+	KafkaTestProducer kafkaProducer;
+
+	@GetMapping(value = "/producer")
+	public String producer(@RequestParam(required = false, name="message") String message) {
+		kafkaProducer.send(message);
+		return "Message sent to the Kafka Topic 'curso' Successfully";
+	}
+
+}
+```
+
+The necessary properties for the producer 
+
+```properties
+spring.kafka.bootstrap-servers=192.168.1.80:9092
+```
+
+must be included in the application.properties file. Aditionally only the topic name is required as configuration.
+
+### First Spring Boot Kafka consumer:
+
+```java	
+@Component
+public class KafkaTestConsumer {
+
+	@KafkaListener(topics = "${message.topic.name}", groupId = "${message.group.name}")
+	 public void listenTopic1(List<String> receivedMessages) {
+		 for (String message : receivedMessages) {
+		     System.out.println("Received message in  listener: '" + message + "'");			 
+		 }
+	 }
+		   
+}
+```
+
+The necessary properties for the consumer 
+
+```properties
+spring.kafka.bootstrap-servers=192.168.1.80:9092
+message.topic.name=curso
+message.group.name=UNICO
+```
+
+must be included in the application.properties file. 
 
 ## Bibliography
 

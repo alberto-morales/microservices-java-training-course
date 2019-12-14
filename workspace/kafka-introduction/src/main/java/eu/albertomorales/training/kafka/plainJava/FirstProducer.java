@@ -1,4 +1,4 @@
-package eu.albertomorales.training.kafka;
+package eu.albertomorales.training.kafka.plainJava;
 
 import java.util.Date;
 import java.util.Properties;
