@@ -14,7 +14,7 @@ import eu.albertomorales.training.acmenet.dto.IssuerAuthorizationRequest;
 import eu.albertomorales.training.acmenet.dto.IssuerAuthorizationResponse;
 import eu.albertomorales.training.acmenet.restclient.IssuerAuthorizationRestClient;
 
-@Controller
+// @Controller
 public class AcquirerAuthorizationController {
 
 	public AcquirerAuthorizationController(IssuerAuthorizationRestClient issuerAuthorizationRestClient) {
@@ -22,7 +22,7 @@ public class AcquirerAuthorizationController {
 		this.issuerAuthorizationRestClient = issuerAuthorizationRestClient;
 	}
 
-	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
+//	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
     public AcquirerAuthorizationResponse save(@RequestBody AcquirerAuthorizationRequest dto) {
 		IssuerAuthorizationResponse issuerResponse = 

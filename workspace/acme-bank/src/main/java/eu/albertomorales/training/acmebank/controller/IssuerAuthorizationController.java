@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import eu.albertomorales.training.acmebank.dto.IssuerAuthorizationRequest;
 import eu.albertomorales.training.acmebank.dto.IssuerAuthorizationResponse;
 
-@Controller
+// @Controller
 public class IssuerAuthorizationController {
 
-	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
+//  	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody
     public IssuerAuthorizationResponse save(@RequestBody IssuerAuthorizationRequest dto) {
 	    LocalDateTime dateTime = LocalDateTime.now();

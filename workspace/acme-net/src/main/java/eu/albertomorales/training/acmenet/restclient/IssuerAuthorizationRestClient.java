@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import eu.albertomorales.training.acmenet.dto.IssuerAuthorizationRequest;
 import eu.albertomorales.training.acmenet.dto.IssuerAuthorizationResponse;
 
-@FeignClient("acme-bank-services")
+// @FeignClient("acme-bank-services")
 public interface IssuerAuthorizationRestClient {
 
-	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
+//	@RequestMapping(value="/authorization", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody
     public abstract IssuerAuthorizationResponse save(@RequestBody IssuerAuthorizationRequest dto);
 

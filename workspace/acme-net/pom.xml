@@ -25,11 +25,13 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
+		<!-- 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-				
+		 -->
+		 	
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -67,11 +69,13 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 		
+		<!-- 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 			<scope>test</scope>
-		</dependency>			
+		</dependency>
+		 -->			
 	</dependencies>
 	
 	<dependencyManagement>
