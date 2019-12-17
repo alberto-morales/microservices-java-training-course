@@ -390,6 +390,42 @@ message.group.name=UNICO
 
 must be included in the application.properties file. 
 
+# Improving ACME app with kafka
+
+##Turning off Eureka 
+
+and the remains of sync communication between microservices:
+
+**(acmebank project)**
+* AcmeBankApplication: comment *//@EnableEurekaClient* and its import.
+* IssuerAuthorizationController: comment *//@Controller* and *//@RequestMapping*
+
+**(acmenet project)**
+* AcmeNetApplication: comment *//@EnableEurekaClient*, *//@EnableFeignClients* and its imports.
+* AcquirerAuthorizationController: comment *//@Controller* and *//@RequestMapping*
+* IssuerAuthorizationRestClient: comment *//@FeignClient* and *//@RequestMapping*
+
+**(both of them)**
+* application.properties: comment 
+    
+    #eureka.client.serviceUrl.defaultZone  = http://localhost:8761/eureka
+    #spring.application.name=acme-net-services
+
+**(Both pom.xml)**
+
+comment 
+
+*spring-cloud-starter-netflix-eureka-client* 
+
+and
+
+*spring-cloud-starter-netflix-eureka-server*
+dependencies.
+
+## Refactoring case study
+
+![Refactoring case study](./images/refactoring-case-study.png)
+
 ## Bibliography
 
 ![Kafka: The definitive guide](./images/confluent-kafka-definitive-guide.png)
