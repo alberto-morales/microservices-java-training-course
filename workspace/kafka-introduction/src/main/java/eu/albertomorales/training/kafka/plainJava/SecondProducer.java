@@ -10,9 +10,6 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 
 public class SecondProducer {
 	
-	private final String BOOTSTRAP_SERVERS = "192.168.1.80:9092";
-	private final String TOPIC_NAME = "curso";
-	
 	private void doIt() throws InterruptedException {
 		Properties prop = new Properties();
 		prop.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
@@ -40,5 +37,8 @@ public class SecondProducer {
 		SecondProducer producer = new SecondProducer();
 		producer.doIt();
 	}
+	
+	private final String BOOTSTRAP_SERVERS = "localhost:9092";
+	private final String TOPIC_NAME = "curso";		
 
 }

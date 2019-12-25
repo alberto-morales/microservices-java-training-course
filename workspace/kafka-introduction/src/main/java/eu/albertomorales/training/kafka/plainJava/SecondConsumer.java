@@ -12,10 +12,6 @@ import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class SecondConsumer {
-
-	private final String BOOTSTRAP_SERVERS = "192.168.1.80:9092";
-	private final String TOPIC_NAME = "curso";
-	private final String GROUP_ID = "KafkaExampleConsumer";
 	
 	private Consumer<Long, String> createConsumer(String consumerGroup) {
 		final Properties props = new Properties();
@@ -76,5 +72,9 @@ public class SecondConsumer {
 		SecondConsumer consumer = new SecondConsumer();
 		consumer.doIt(consumerGroup);
 	}
+	
+	private final String BOOTSTRAP_SERVERS = "localhost:9092";
+	private final String TOPIC_NAME = "curso";
+	private final String GROUP_ID = "KafkaExampleConsumer";	
 	
 }
