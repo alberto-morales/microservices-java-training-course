@@ -10,7 +10,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 
 public class FirstProducer {
 	
-	private final String BOOTSTRAP_SERVERS = "192.168.1.80:9092";
+	private final String BOOTSTRAP_SERVERS = "lab:9092";
 	private final String TOPIC_NAME = "curso";
 	
 	private void doIt() {

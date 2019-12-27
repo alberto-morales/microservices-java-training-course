@@ -11,7 +11,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class FirstConsumer {
 
-	private final String BOOTSTRAP_SERVERS = "192.168.1.80:9092";
+	private final String BOOTSTRAP_SERVERS = "lab:9092";
 	private final String TOPIC_NAME = "curso";
 	private final String GROUP_ID = "KAfkaExampleConsumer";
 	

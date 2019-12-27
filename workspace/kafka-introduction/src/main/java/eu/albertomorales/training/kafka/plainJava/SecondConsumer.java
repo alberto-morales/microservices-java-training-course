@@ -73,7 +73,7 @@ public class SecondConsumer {
 		consumer.doIt(consumerGroup);
 	}
 	
-	private final String BOOTSTRAP_SERVERS = "localhost:9092";
+	private final String BOOTSTRAP_SERVERS = "lab:9092";
 	private final String TOPIC_NAME = "curso";
 	private final String GROUP_ID = "KafkaExampleConsumer";	
 	

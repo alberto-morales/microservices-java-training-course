@@ -1,4 +1,6 @@
 
+CREATE DATABASE acme_bank_products;
+
 CREATE TABLE card_holders (ID INTEGER NOT NULL PRIMARY KEY,
 firstname VARCHAR,
 lastname VARCHAR,
@@ -43,7 +45,14 @@ values (670000009,680000,'349996088554521','C');
 INSERT INTO cards (ID, card_holder, pan, cct)
 values (670000010,680000,'344448665797516','C');
 
-CREATE USER acme WITH PASSWORD 'acme' CREATEDB;
+DO $$
+BEGIN
+  CREATE USER  acme WITH PASSWORD 'acme' CREATEDB;
+  EXCEPTION WHEN OTHERS THEN
+  RAISE NOTICE 'not creating role acme -- it already exists';
+END
+$$;
+
 GRANT ALL PRIVILEGES ON DATABASE acme_bank_products TO PUBLIC;
 GRANT ALL PRIVILEGES ON TABLE card_holders TO acme;
 GRANT ALL PRIVILEGES ON TABLE cards TO acme;

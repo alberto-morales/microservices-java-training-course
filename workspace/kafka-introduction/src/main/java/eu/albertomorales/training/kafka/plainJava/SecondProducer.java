@@ -38,7 +38,7 @@ public class SecondProducer {
 		producer.doIt();
 	}
 	
-	private final String BOOTSTRAP_SERVERS = "localhost:9092";
+	private final String BOOTSTRAP_SERVERS = "lab:9092";
 	private final String TOPIC_NAME = "curso";		
 
 }

@@ -1,3 +1,4 @@
+CREATE DATABASE acme_net;
 
 CREATE TABLE locked_cards (ID INTEGER NOT NULL PRIMARY KEY,
 pan CHAR(16) NOT NULL,
@@ -6,6 +7,14 @@ comment VARCHAR
 );
 
 CREATE SEQUENCE hibernate_sequence;
+
+DO $$
+BEGIN
+  CREATE USER  acme WITH PASSWORD 'acme' CREATEDB;
+  EXCEPTION WHEN OTHERS THEN
+  RAISE NOTICE 'not creating role acme -- it already exists';
+END
+$$;
 
 GRANT ALL PRIVILEGES ON DATABASE acme_net TO PUBLIC;
 GRANT ALL PRIVILEGES ON TABLE locked_cards TO acme;
