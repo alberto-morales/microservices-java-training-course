@@ -10,6 +10,7 @@
 * [gmaster](https://gmaster.io/) (gmaster git client)
 * [WinSCP](https://winscp.net/eng/download.php) (WinSCP-5.15.5-Setup verified)
 * [Postman](https://www.getpostman.com/) (Postman-win64-7.10.0-Setup verified)
+* [pgAdmin](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v4.16/windows/) (pgAdmin-v4.16 verified)
 * [MobaXterm](https://mobaxterm.mobatek.net/download.html) (MobaXterm_Installer_v12.3 verified)
 * [Eclipse IDE](https://www.eclipse.org/downloads/packages/release/neon/2/eclipse-ide-java-developers) (eclipse-inst-win64 verified)
 * [Apache Maven](https://maven.apache.org/download.cgi) (apache-maven-3.6.2-bin verified)

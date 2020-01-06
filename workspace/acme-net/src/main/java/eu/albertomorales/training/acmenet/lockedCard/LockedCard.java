@@ -1,8 +1,6 @@
-package eu.albertomorales.training.acmenet.persistence;
+package eu.albertomorales.training.acmenet.lockedCard;
 
 public interface LockedCard {
-
-	Long getId();
 
 	String getPAN();
 	

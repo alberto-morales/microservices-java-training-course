@@ -1,13 +1,14 @@
-package eu.albertomorales.training.acmenet.persistence.impl;
+package eu.albertomorales.training.acmenet.lockedCard.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 
-import eu.albertomorales.training.acmenet.persistence.LockedCard;
+import eu.albertomorales.training.acmenet.lockedCard.LockedCard;
+
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "locked_cards")

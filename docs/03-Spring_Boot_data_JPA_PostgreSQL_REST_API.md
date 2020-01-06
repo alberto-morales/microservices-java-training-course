@@ -13,10 +13,9 @@ This case study is the creation of a service that, using data stored in a relati
 
 - RESTful  Web Services with Spring Boot [session](https://github.com/alberto-morales/microservices-java-training-course/blob/20191101-AcmeBankApplication/docs/RESTFul-Web-Service-Spring-Boot.md) finished.
 
-- SGBD (PostgreSQL) installed.
-We recommend to follow this [guide](http://www.postgresqltutorial.com/install-postgresql/) that illustrates the PostgreSQL installation proccess (at the current time we use PostgreSQL 12)
+- SGBD (PostgreSQL) installed. PostgreSQL is already installed in the provided VM, but it you feel better using Windows version, you can intall it by yourself. In this case, We recommend to follow this [guide](http://www.postgresqltutorial.com/install-postgresql/) that illustrates the PostgreSQL installation proccess (at the current time we use PostgreSQL 12).
 
-### Step 1: PostgreSQL admin tool installation
+### Step 1: PostgreSQL admin tool
 
 As with every SBBD, we need a GUI tool for manipulating, visualizing and sharing the data living in Postgres server.
 
